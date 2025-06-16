@@ -1,7 +1,6 @@
 {
   "name": "firebase_uploader",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,5 +12,6 @@
     "firebase-admin": "^13.4.0",
     "uuid": "^11.1.0",
     "xlsx": "^0.18.5"
-  }
+  },
+  "description": ""
 }
