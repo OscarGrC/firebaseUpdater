@@ -1,4 +1,4 @@
-// src/utils.js
+//src/utils.js
 
 function isValidDate(str) {
     return /^\d{2}-\d{2}-\d{4}$/.test(str);
@@ -27,20 +27,21 @@ function isValidDate(str) {
  * @returns {string|null}
  */
 function parseFechaManual(serial) {
-    const utc_days = Math.floor(serial - 25569);
-    const utc_value = utc_days * 86400 * 1000; // milisegundos
-    const date_info = new Date(utc_value);
-  
-    const year = date_info.getFullYear();
-    const month = date_info.getMonth() + 1; // meses 0-based
-    const day = date_info.getDate();
-  
-    return `${String(day).padStart(2, '0')}-${String(month).padStart(2, '0')}-${year}`;
-  }
+  // Excel fecha base: 1 enero 1900 -> serial 1
+  const utc_days  = Math.floor(serial - 25569);
+  const utc_value = utc_days * 86400;                                        
+  const date_info = new Date(utc_value * 1000);
+
+  const year = date_info.getFullYear();
+  const month = date_info.getMonth() + 1; // 0-based
+  const day = date_info.getDate();
+
+  // Formatear a dd-mm-yyyy
+  return `${String(day).padStart(2, '0')}-${String(month).padStart(2, '0')}-${year}`;
+}
   module.exports = {
     isValidDate,
     normalizeBool,
     isValidEmail,
     parseArray,parseFechaManual
   };
-  

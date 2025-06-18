@@ -6,7 +6,7 @@ const {
   parseFechaManual
 } = require('./utils');
 
-const modalidadesValidas = ['anual', 'semestral', 'trimestral'];
+const modalidadesValidas = ['anual', 'semestral', 'trimestral','mensual'];
 
 function validarModalidad(rawModalidad) {
   if (!rawModalidad) return { modalidad: null, error: 'modalidad faltante' };
@@ -55,8 +55,11 @@ if (emailsInvalidos.length > 0) {
 }
 
 
-  empresa.razon_social = (row['Razón Social / Marca'] || '').trim();
-  if (!empresa.razon_social) errores.push('razon_social faltante');
+ empresa.razon_social = (row['Razón Social / Marca'] || '').trim();
+  if (!empresa.razon_social) {
+    empresa.razon_social = 'RAZON SOCIAL VACIA';
+    // Ya no se agrega error por razon_social faltante
+  }
 
   empresa.titular = (row['Titular'] || '').trim();
   empresa.telefono_titular = String(row['telefono_titular'] || '').trim();
