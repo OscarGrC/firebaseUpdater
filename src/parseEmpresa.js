@@ -3,7 +3,8 @@ const {
   normalizeBool,
   isValidEmail,
   parseArray,
-  parseFechaManual
+  parseFechaManual,
+  parseTelefonos
 } = require('./utils');
 
 const modalidadesValidas = ['anual', 'semestral', 'trimestral','mensual'];
@@ -42,7 +43,7 @@ function parseEmpresa(row, index) {
 
   // Textos normales
   empresa.contacto = (row['contacto'] || '').trim();
-  empresa.telefono_contacto = String(row['telefono_contacto'] || '').trim();
+ empresa.telefono_contacto = parseTelefonos(row['telefono_contacto']);
 
   const rawEmails = parseArray(row['Email']);
 const emailsValidos = rawEmails.filter(isValidEmail);

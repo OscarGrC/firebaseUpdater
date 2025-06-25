@@ -39,9 +39,17 @@ function parseFechaManual(serial) {
   // Formatear a dd-mm-yyyy
   return `${String(day).padStart(2, '0')}-${String(month).padStart(2, '0')}-${year}`;
 }
+function parseTelefonos(raw) {
+  if (!raw) return [];
+  return String(raw)
+    .split(/[,;/|\\\-\s]+/) // separadores comunes: coma, punto y coma, barra, guión, espacios
+    .map(t => t.trim())
+    .filter(t => t.length > 0);
+}
   module.exports = {
     isValidDate,
     normalizeBool,
     isValidEmail,
-    parseArray,parseFechaManual
+    parseArray,parseFechaManual,
+    parseTelefonos
   };

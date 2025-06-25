@@ -7,7 +7,9 @@ const { parseEmpresa } = require('./parseEmpresa');  // CORRECTO: importar como 
 const serviceAccount = require('../serviceAccountKey.json');
 admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
 const db = admin.firestore();
-
+db.collection('test').add({ test: 'ok' })
+  .then(() => console.log('✅ Conexión correcta'))
+  .catch((e) => console.error('❌ Error de autenticación:', e.message));
 const excelPath = path.join(__dirname, '../data/empresas.xlsx');
 const workbook = xlsx.readFile(excelPath);
 const rows = xlsx.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
